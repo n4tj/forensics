@@ -1,13 +1,13 @@
-import { Cpu, Home, Binary, Search, Code2, FlaskConical, Star } from "lucide-react";
+import { Cpu, Home, Binary, Lock, ShieldCheck, FlaskConical, Star } from "lucide-react";
 import { NAV_ITEMS } from "../constants";
 
 const NAV_ICONS = {
-  home:    <Home size={15} />,
-  binwalk: <Binary size={15} />,
-  strings: <Search size={15} />,
-  base64:  <Code2 size={15} />,
-  lab:     <FlaskConical size={15} />,
-  credits: <Star size={15} />,
+  home:     <Home size={15} />,
+  chmod:    <Lock size={15} />,
+  checksec: <ShieldCheck size={15} />,
+  binwalk:  <Binary size={15} />,
+  lab:      <FlaskConical size={15} />,
+  credits:  <Star size={15} />,
 };
 
 function Navbar({ section, setSection }) {

@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
-import { Binary, FlaskConical, Cpu, Search, Code2, Info } from "lucide-react";
+import { Binary, FlaskConical, Cpu, ShieldCheck, Lock, Info } from "lucide-react";
 
 const tools = [
+  {
+    id: "chmod",
+    icon: <Lock size={22} />,
+    name: "Chmod",
+    desc: "Gestione dei permessi su file e directory",
+    gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+  },
+  {
+    id: "checksec",
+    icon: <ShieldCheck size={22} />,
+    name: "Checksec",
+    desc: "Analisi delle protezioni di sicurezza di un binario",
+    gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+  },
   {
     id: "binwalk",
     icon: <Binary size={22} />,
     name: "Binwalk",
     desc: "Analisi e identificazione di file binari e firmware",
     gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  },
-  {
-    id: "strings",
-    icon: <Search size={22} />,
-    name: "Strings",
-    desc: "Ricerca di testo leggibile nei file",
-    gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-  },
-  {
-    id: "base64",
-    icon: <Code2 size={22} />,
-    name: "Base64",
-    desc: "Decodifica di dati codificati e payload",
-    gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
   },
   {
     id: "lab",
