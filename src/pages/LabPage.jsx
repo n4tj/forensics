@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FlaskConical, BookOpen, CheckCircle } from "lucide-react";
-import { TUTOR_STEPS, BINWALK_OUTPUT, STRINGS_OUTPUT, BASE64_PAYLOAD } from "../constants";
+import { TUTOR_STEPS, BINWALK_OUTPUT, CHMOD_OUTPUT, CHECKSEC_OUTPUT } from "../constants";
 import TypingText from "../components/TypingText";
 
 const COLOR_MAP = {
@@ -14,7 +14,7 @@ const COLOR_MAP = {
   cmd:     "#d4d4d8",
 };
 
-const PROGRESS_LABELS = ["Binwalk", "Strings", "Base64"];
+const PROGRESS_LABELS = ["Chmod", "Checksec", "Binwalk"];
 
 function LabPage() {
   const [history, setHistory]             = useState([]);
@@ -41,17 +41,17 @@ function LabPage() {
     if (cmd === "help") {
       addLines([
         { type: "info", text: "Comandi disponibili in questo laboratorio:" },
+        { type: "cmd",  text: "  chmod 600 evidenza.bin      → imposta permessi sicuri" },
+        { type: "cmd",  text: "  checksec evidenza.bin       → analizza le protezioni del binario" },
         { type: "cmd",  text: "  binwalk evidenza.bin        → analizza il file binario" },
-        { type: "cmd",  text: "  strings evidenza.bin        → cerca stringhe leggibili" },
-        { type: "cmd",  text: `  echo "..." | base64 -d      → decodifica una stringa Base64` },
         { type: "cmd",  text: "  clear                       → pulisce il terminale" },
         { type: "cmd",  text: "  help                        → mostra questo messaggio" },
       ]);
       return;
     }
 
-    if (cmd === "binwalk evidenza.bin") {
-      addLines([{ type: "output", text: BINWALK_OUTPUT }]);
+    if (cmd === "chmod 600 evidenza.bin") {
+      addLines([{ type: "output", text: CHMOD_OUTPUT }]);
       if (step === 0) {
         setCompletedSteps((s) => new Set(s).add(0));
         setTimeout(() => { setStep(1); setTutorTyping(true); }, 700);
@@ -59,8 +59,8 @@ function LabPage() {
       return;
     }
 
-    if (cmd === "strings evidenza.bin") {
-      addLines([{ type: "output", text: STRINGS_OUTPUT }]);
+    if (cmd === "checksec evidenza.bin") {
+      addLines([{ type: "output", text: CHECKSEC_OUTPUT }]);
       if (step === 1) {
         setCompletedSteps((s) => new Set(s).add(1));
         setTimeout(() => { setStep(2); setTutorTyping(true); }, 700);
@@ -68,8 +68,8 @@ function LabPage() {
       return;
     }
 
-    if (cmd.includes("base64 -d") && cmd.includes(BASE64_PAYLOAD.slice(0, 18))) {
-      addLines([{ type: "success", text: "CTF{4cademy_l1nux_2024}" }]);
+    if (cmd === "binwalk evidenza.bin") {
+      addLines([{ type: "output", text: BINWALK_OUTPUT }]);
       if (step === 2) {
         setCompletedSteps((s) => new Set(s).add(2));
         setTimeout(() => { setStep(3); setTutorTyping(true); }, 700);
@@ -77,12 +77,16 @@ function LabPage() {
       return;
     }
 
-    if (cmd.startsWith("binwalk") && !cmd.includes("evidenza.bin")) {
-      addLines([{ type: "warn", text: "Manca il file da analizzare. Prova: binwalk evidenza.bin" }]);
+    if (cmd.startsWith("chmod") && !cmd.includes("evidenza.bin")) {
+      addLines([{ type: "warn", text: "Manca il file. Prova: chmod 600 evidenza.bin" }]);
       return;
     }
-    if (cmd.startsWith("strings") && !cmd.includes("evidenza.bin")) {
-      addLines([{ type: "warn", text: "Manca il file da analizzare. Prova: strings evidenza.bin" }]);
+    if (cmd.startsWith("checksec") && !cmd.includes("evidenza.bin")) {
+      addLines([{ type: "warn", text: "Manca il file. Prova: checksec evidenza.bin" }]);
+      return;
+    }
+    if (cmd.startsWith("binwalk") && !cmd.includes("evidenza.bin")) {
+      addLines([{ type: "warn", text: "Manca il file da analizzare. Prova: binwalk evidenza.bin" }]);
       return;
     }
 
