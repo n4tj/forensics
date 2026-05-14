@@ -11,17 +11,17 @@ import Navbar from "./components/Navbar";
 import BackgroundMesh from "./components/BackgroundMesh";
 
 import HomePage from "./pages/Homepage";
+import ChmodPage from "./pages/ChmodPage";
+import ChsecPage from "./pages/ChsecPage";
 import BinwalkPage from "./pages/BinwalkPage";
-import StringsPage from "./pages/StringsPage";
-import Base64Page from "./pages/Base64Page";
 import LabPage from "./pages/LabPage";
 import CreditsPage from "./pages/CreditsPage";
 
 const PAGES = {
   home:    (props) => <HomePage {...props} />,
+  chmod:   ()     => <ChmodPage />,
+  checksec: ()    => <ChsecPage />,
   binwalk: ()     => <BinwalkPage />,
-  strings: ()     => <StringsPage />,
-  base64:  ()     => <Base64Page />,
   lab:     ()     => <LabPage />,
   credits: ()     => <CreditsPage />,
 };
